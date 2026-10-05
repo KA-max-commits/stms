@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes busDrive { 0% { transform: translateX(-120px); } 100% { transform: translateX(calc(100vw)); } }
+@keyframes busBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes roadMove { from { background-position: 0 0; } to { background-position: -60px 0; } }
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(239,68,68,.55); } 70% { box-shadow: 0 0 0 12px rgba(239,68,68,0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); } }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes dashFlow { to { background-position: 24px 0; } }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+
+.page-enter { animation: fadeInUp .45s ease both; }
+.anim-in { animation: fadeInUp .55s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 55ms); }
+.anim-left { animation: slideInLeft .5s ease both; animation-delay: calc(var(--i, 0) * 45ms); }
+.hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
+.hover-lift:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(15, 23, 42, .16); }
+.pulse-danger { animation: pulseRing 1.8s infinite; }
+.blink { animation: blink 1.6s infinite; }
+.float { animation: floatY 3.5s ease-in-out infinite; }
+.bus-bounce { animation: busBounce .5s ease-in-out infinite; display: inline-flex; }
+.road {
+  height: 6px; border-radius: 3px; background-color: rgba(255,255,255,.25);
+  background-image: linear-gradient(90deg, #fff 50%, transparent 50%);
+  background-size: 30px 2px; background-repeat: repeat-x; background-position: 0 center;
+  animation: roadMove 1.2s linear infinite;
+}
+.route-line {
+  height: 4px; min-width: 32px; flex: 1; border-radius: 2px;
+  background-image: linear-gradient(90deg, currentColor 50%, transparent 50%);
+  background-size: 12px 4px; animation: dashFlow .8s linear infinite;
+}
+.grad-anim { background-size: 200% 200%; animation: gradientShift 12s ease infinite; }
+
+.MuiDataGrid-row { transition: background-color .15s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+@media print {
+  .no-print, .MuiDrawer-root, .MuiAppBar-root { display: none !important; }
+  .print-main { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+  body { background: #fff !important; }
+  .anim-in, .page-enter { animation: none !important; }
+}
